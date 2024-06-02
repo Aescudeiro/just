@@ -2,6 +2,7 @@ import { client } from "@/sanity/lib/client";
 import { urlForImage } from "@/sanity/lib/image";
 import { Event } from "@/typings";
 import { groq } from "next-sanity";
+import { Image } from "next-sanity/image";
 
 const query = groq`
   *[_type == "event"]
@@ -20,7 +21,12 @@ const Home = async () => {
           <li key={event._id}>
             <h2>{event.title}</h2>
             <p>{event.date}</p>
-            <img src={urlForImage(event?.image)} alt={event.title} />
+            <Image
+              src={urlForImage(event?.image)}
+              alt={event.title}
+              width={200}
+              height={200}
+            />
             <p>{event.location}</p>
             <p>{event.description}</p>
           </li>
